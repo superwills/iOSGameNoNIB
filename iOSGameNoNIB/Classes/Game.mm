@@ -16,7 +16,7 @@
 // We replaced the initWithCoder method with this regular init one
 - (id) init
 {
-  puts( "INIT WITH REGULAR" ) ;
+  puts( "INIT (WITHOUT CODER)" ) ;
   
   if( (self = [super init]) )
 	{
@@ -35,28 +35,28 @@
 {
   UITouch *touch = [[touches objectEnumerator] nextObject] ;
   CGPoint pt = [touch locationInView:self.view] ;
-  printf( "touchesBegan %d (%.1f %.1f)\n", [touches count], pt.x, pt.y ) ;
+  printf( "touchesBegan %lu (%.1f %.1f)\n", [touches count], pt.x, pt.y ) ;
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
   UITouch *touch = [[touches objectEnumerator] nextObject] ;
   CGPoint pt = [touch locationInView:self.view] ;
-  printf( "touchesMoved %d (%.1f %.1f)\n", [touches count], pt.x, pt.y ) ;
+  printf( "touchesMoved %lu (%.1f %.1f)\n", [touches count], pt.x, pt.y ) ;
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
   UITouch *touch = [[touches objectEnumerator] nextObject] ;
   CGPoint pt = [touch locationInView:self.view] ;
-  printf( "touchesEnded %d (%.1f %.1f)\n", [touches count], pt.x, pt.y ) ;
+  printf( "touchesEnded %lu (%.1f %.1f)\n", [touches count], pt.x, pt.y ) ;
 }
 
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
   UITouch *touch = [[touches objectEnumerator] nextObject] ;
   CGPoint pt = [touch locationInView:self.view] ;
-  printf( "touchesCancelled %d (%.1f %.1f)\n", [touches count], pt.x, pt.y ) ;
+  printf( "touchesCancelled %lu (%.1f %.1f)\n", [touches count], pt.x, pt.y ) ;
 }
 
 // Drawing

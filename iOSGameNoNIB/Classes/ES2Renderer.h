@@ -14,7 +14,9 @@
 	GLint backingHeight;
 	
 	// The OpenGL names for the framebuffer and renderbuffer used to render to this view
-	GLuint defaultFramebuffer, colorRenderbuffer;
+	GLuint defaultFramebufferId, colorRenderbufferId;
+  
+  GLuint vertexBufferId, colorBufferId, indexBufferId;
 	
 	// the shader program object
 	GLuint program;
