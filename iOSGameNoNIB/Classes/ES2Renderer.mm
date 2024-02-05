@@ -117,14 +117,14 @@ enum
 	program = glCreateProgram();
 	
 	// create and compile vertex shader
-	vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"template" ofType:@"vsh"];
+	vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"vertexShader" ofType:@"vsh"];
 	if (!compileShader(&vertShader, GL_VERTEX_SHADER, 1, vertShaderPathname)) {
 		destroyShaders(vertShader, fragShader, program);
 		return NO;
 	}
 	
 	// create and compile fragment shader
-	fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"template" ofType:@"fsh"];
+	fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"fragmentShader" ofType:@"fsh"];
 	if (!compileShader(&fragShader, GL_FRAGMENT_SHADER, 1, fragShaderPathname)) {
 		destroyShaders(vertShader, fragShader, program);
 		return NO;
