@@ -1,9 +1,8 @@
-#import "ES2Renderer.h"
+#import "ES2RendererView.h"
 #import "Shaders.h"
 #include "matrix.h"
 
-bool GL_OK()
-{
+bool GL_OK() {
   GLenum err = glGetError() ;
   if( err != GL_NO_ERROR )
     printf( "GLERROR %d\n", err ) ;
@@ -18,8 +17,7 @@ enum {
 GLint uniforms[NUM_UNIFORMS];
 
 // attribute index
-enum VertexAttributes
-{
+enum VertexAttributes {
 	Position,
 	Color,
 	NumberOfAttributes
@@ -46,20 +44,21 @@ const GLubyte squareColors[] = {
   255, 255, 255, 255,
 };
 
-@implementation ES2Renderer
+@implementation ES2RendererView
 
 // This is required to prevent system fuckup,
 //
 // -[CALayer setDrawableProperties:]: unrecognized selector sent to instance 0x8b18330
-// *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[CALayer setDrawableProperties:]: 
-+ (Class) layerClass
-{
+// *** Terminating app due to uncaught exception 'NSInvalidArgumentException', reason: '-[CALayer setDrawableProperties:]:
+// 6.
++ (Class) layerClass {
+  puts("6. [ES2RendererView layerClass]");
   return [CAEAGLLayer class];
 }
 
-// Create an ES 2.0 context
-- (ES2Renderer*) init
-{
+// 5.
+- (ES2RendererView*) init {
+  puts("5. [ES2RendererView init]");
   self = [super init];
   if ( !self )  return self;
   
@@ -120,15 +119,90 @@ const GLubyte squareColors[] = {
 	return self;
 }
 
-- (void) layoutSubviews
-{
-  puts( "layoutSubviews" ) ;
+// 7.
+- (BOOL) loadShaders {
+	puts( "7. [ES2RendererView loadShaders]" );
+	GLuint vertShader = 0, fragShader = 0;
+	NSString *vertShaderPathname, *fragShaderPathname;
+	
+	// create shader program
+	program = glCreateProgram();  GL_OK();
+	
+	// create and compile vertex shader
+	vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"vertexShader" ofType:@"vsh"];
+	if (!compileShader(&vertShader, GL_VERTEX_SHADER, 1, vertShaderPathname)) {
+		destroyShaders(vertShader, fragShader, program);
+		return NO;
+	}
+	
+	// create and compile fragment shader
+	fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"fragmentShader" ofType:@"fsh"];
+	if (!compileShader(&fragShader, GL_FRAGMENT_SHADER, 1, fragShaderPathname)) {
+		destroyShaders(vertShader, fragShader, program);
+		return NO;
+	}
+	
+	// attach vertex shader to program
+	glAttachShader(program, vertShader);  GL_OK();
+	
+	// attach fragment shader to program
+	glAttachShader(program, fragShader);  GL_OK();
+	
+	// bind attribute locations
+	// this needs to be done prior to linking
+	glBindAttribLocation(program, VertexAttributes::Position, "position");  GL_OK();
+	glBindAttribLocation(program, VertexAttributes::Color, "color");  GL_OK();
+	
+	// link program
+	if (!linkProgram(program)) {
+		destroyShaders(vertShader, fragShader, program);
+		return NO;
+	}
+	
+	// get uniform locations
+	uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX] = glGetUniformLocation(program, "modelViewProjectionMatrix");  GL_OK();
+	
+	// release vertex and fragment shaders
+	if (vertShader) {
+		glDeleteShader(vertShader);
+		vertShader = 0;
+	}
+	if (fragShader) {
+		glDeleteShader(fragShader);
+		fragShader = 0;
+	}
+	
+	return YES;
+}
+
+// 9.
+- (void) layoutSubviews {
+  puts( "9. [ES2RendererView layoutSubviews]" ) ;
 	[self resizeFromLayer:(CAEAGLLayer*)self.layer];
   [self render];
 }
 
-- (void)render
-{
+// 10.
+- (BOOL) resizeFromLayer:(CAEAGLLayer *)layer {
+  puts("10. [ES2RendererView resizeFromLayer]");
+	// Allocate color buffer backing based on the current layer size
+  glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbufferId);  GL_OK();
+  [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
+	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);  GL_OK();
+  glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &backingHeight);  GL_OK();
+	
+  if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+	{
+    printf( "Failed to make complete framebuffer object %d", glCheckFramebufferStatus(GL_FRAMEBUFFER) );
+    return NO;
+  }
+  
+  return YES;
+}
+
+// 11.
+- (void) render {
+  //puts("11. [ES2RendererView render]");
   // Replace the implementation of this method to do your own custom drawing
   [EAGLContext setCurrentContext:context];
   
@@ -211,80 +285,8 @@ const GLubyte squareColors[] = {
   [context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
-- (BOOL)loadShaders {
-	
-	GLuint vertShader, fragShader;
-	NSString *vertShaderPathname, *fragShaderPathname;
-	
-	// create shader program
-	program = glCreateProgram();  GL_OK();
-	
-	// create and compile vertex shader
-	vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"vertexShader" ofType:@"vsh"];
-	if (!compileShader(&vertShader, GL_VERTEX_SHADER, 1, vertShaderPathname)) {
-		destroyShaders(vertShader, fragShader, program);
-		return NO;
-	}
-	
-	// create and compile fragment shader
-	fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"fragmentShader" ofType:@"fsh"];
-	if (!compileShader(&fragShader, GL_FRAGMENT_SHADER, 1, fragShaderPathname)) {
-		destroyShaders(vertShader, fragShader, program);
-		return NO;
-	}
-	
-	// attach vertex shader to program
-	glAttachShader(program, vertShader);  GL_OK();
-	
-	// attach fragment shader to program
-	glAttachShader(program, fragShader);  GL_OK();
-	
-	// bind attribute locations
-	// this needs to be done prior to linking
-	glBindAttribLocation(program, VertexAttributes::Position, "position");  GL_OK();
-	glBindAttribLocation(program, VertexAttributes::Color, "color");  GL_OK();
-	
-	// link program
-	if (!linkProgram(program)) {
-		destroyShaders(vertShader, fragShader, program);
-		return NO;
-	}
-	
-	// get uniform locations
-	uniforms[UNIFORM_MODELVIEW_PROJECTION_MATRIX] = glGetUniformLocation(program, "modelViewProjectionMatrix");  GL_OK();
-	
-	// release vertex and fragment shaders
-	if (vertShader) {
-		glDeleteShader(vertShader);
-		vertShader = 0;
-	}
-	if (fragShader) {
-		glDeleteShader(fragShader);
-		fragShader = 0;
-	}
-	
-	return YES;
-}
-
-- (BOOL) resizeFromLayer:(CAEAGLLayer *)layer
-{
-	// Allocate color buffer backing based on the current layer size
-  glBindRenderbuffer(GL_RENDERBUFFER, colorRenderbufferId);  GL_OK();
-  [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:layer];
-	glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &backingWidth);  GL_OK();
-  glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &backingHeight);  GL_OK();
-	
-  if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-	{
-    printf( "Failed to make complete framebuffer object %d", glCheckFramebufferStatus(GL_FRAMEBUFFER) );
-    return NO;
-  }
-  
-  return YES;
-}
-
-- (void) dealloc
-{
+- (void) dealloc {
+  puts("[ES2RendererView dealloc]");
 	// tear down GL
 	if (defaultFramebufferId)
 	{
@@ -310,7 +312,7 @@ const GLubyte squareColors[] = {
      [EAGLContext setCurrentContext:nil];
 	
 	context = nil;
-	
+
 }
 
 @end

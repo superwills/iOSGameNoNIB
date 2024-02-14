@@ -2,6 +2,7 @@
 
 int main(int argc, char *argv[])
 {
-  return UIApplicationMain( argc, argv, nil, @"Game" ) ; // The last arg here is the
+  puts("1. LAUNCHING main . . .");
+  return UIApplicationMain( argc, argv, nil, @"GameAppDelegate" ) ; // The last arg here is the
   // name of the UIApplicationDelegate interface impl.
 }

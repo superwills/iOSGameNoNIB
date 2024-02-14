@@ -5,7 +5,7 @@
 #import <OpenGLES/ES2/gl.h>
 #import <OpenGLES/ES2/glext.h>
 
-@interface ES2Renderer : UIView
+@interface ES2RendererView : UIView
 {
 	EAGLContext *context;
 	
@@ -25,9 +25,12 @@
 	
 }
 
+- (ES2RendererView*) init;
 - (BOOL) loadShaders;
-- (void) render;
+- (void) layoutSubviews;
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer;
+- (void) render;
+- (void) dealloc;
 
 @end
 

@@ -13,8 +13,8 @@
 		9F0BBD35185D33C90007D318 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0BBD34185D33C90007D318 /* CoreGraphics.framework */; };
 		9F0BBD37185D33C90007D318 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0BBD36185D33C90007D318 /* UIKit.framework */; };
 		9F0BBD45185D33C90007D318 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F0BBD44185D33C90007D318 /* Images.xcassets */; };
-		9F0BBD69185D345C0007D318 /* Game.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F0BBD61185D345C0007D318 /* Game.mm */; };
-		9F0BBD6A185D345C0007D318 /* ES2Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F0BBD63185D345C0007D318 /* ES2Renderer.mm */; };
+		9F0BBD69185D345C0007D318 /* GameAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F0BBD61185D345C0007D318 /* GameAppDelegate.mm */; };
+		9F0BBD6A185D345C0007D318 /* ES2RendererView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F0BBD63185D345C0007D318 /* ES2RendererView.mm */; };
 		9F0BBD6B185D345C0007D318 /* Shaders.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F0BBD65185D345C0007D318 /* Shaders.mm */; };
 		9F0BBD6C185D345C0007D318 /* matrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F0BBD67185D345C0007D318 /* matrix.mm */; };
 		9F0BBD6E185D34680007D318 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F0BBD6D185D34680007D318 /* main.mm */; };
@@ -32,14 +32,14 @@
 		9F0BBD3A185D33C90007D318 /* iOSGameNoNIB-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOSGameNoNIB-Info.plist"; sourceTree = "<group>"; };
 		9F0BBD40185D33C90007D318 /* iOSGameNoNIB-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOSGameNoNIB-Prefix.pch"; sourceTree = "<group>"; };
 		9F0BBD44185D33C90007D318 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9F0BBD61185D345C0007D318 /* Game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Game.mm; path = Classes/Game.mm; sourceTree = "<group>"; };
-		9F0BBD62185D345C0007D318 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Game.h; path = Classes/Game.h; sourceTree = "<group>"; };
-		9F0BBD63185D345C0007D318 /* ES2Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ES2Renderer.mm; path = Classes/ES2Renderer.mm; sourceTree = "<group>"; };
-		9F0BBD64185D345C0007D318 /* ES2Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ES2Renderer.h; path = Classes/ES2Renderer.h; sourceTree = "<group>"; };
-		9F0BBD65185D345C0007D318 /* Shaders.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Shaders.mm; path = Classes/Shaders.mm; sourceTree = "<group>"; };
-		9F0BBD66185D345C0007D318 /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shaders.h; path = Classes/Shaders.h; sourceTree = "<group>"; };
-		9F0BBD67185D345C0007D318 /* matrix.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = matrix.mm; path = Classes/matrix.mm; sourceTree = "<group>"; };
-		9F0BBD68185D345C0007D318 /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = matrix.h; path = Classes/matrix.h; sourceTree = "<group>"; };
+		9F0BBD61185D345C0007D318 /* GameAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GameAppDelegate.mm; path = Classes/GameAppDelegate.mm; sourceTree = "<group>"; };
+		9F0BBD62185D345C0007D318 /* GameAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameAppDelegate.h; path = Classes/GameAppDelegate.h; sourceTree = "<group>"; };
+		9F0BBD63185D345C0007D318 /* ES2RendererView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ES2RendererView.mm; path = Classes/ES2RendererView.mm; sourceTree = "<group>"; };
+		9F0BBD64185D345C0007D318 /* ES2RendererView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ES2RendererView.h; path = Classes/ES2RendererView.h; sourceTree = "<group>"; };
+		9F0BBD65185D345C0007D318 /* Shaders.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shaders.mm; sourceTree = "<group>"; };
+		9F0BBD66185D345C0007D318 /* Shaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shaders.h; sourceTree = "<group>"; };
+		9F0BBD67185D345C0007D318 /* matrix.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = matrix.mm; sourceTree = "<group>"; };
+		9F0BBD68185D345C0007D318 /* matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
 		9F0BBD6D185D34680007D318 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		9F0BBD6F185D34970007D318 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9F0BBD71185D349F0007D318 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -61,6 +61,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D86F8DB2B7C558400A624E2 /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+				9F0BBD66185D345C0007D318 /* Shaders.h */,
+				9F0BBD65185D345C0007D318 /* Shaders.mm */,
+				9F0BBD68185D345C0007D318 /* matrix.h */,
+				9F0BBD67185D345C0007D318 /* matrix.mm */,
+			);
+			path = graphics;
+			sourceTree = "<group>";
+		};
 		9F0BBD26185D33C90007D318 = {
 			isa = PBXGroup;
 			children = (
@@ -94,15 +105,12 @@
 		9F0BBD38185D33C90007D318 /* iOSGameNoNIB */ = {
 			isa = PBXGroup;
 			children = (
-				9F0BBD64185D345C0007D318 /* ES2Renderer.h */,
-				9F0BBD63185D345C0007D318 /* ES2Renderer.mm */,
-				9F0BBD66185D345C0007D318 /* Shaders.h */,
-				9F0BBD65185D345C0007D318 /* Shaders.mm */,
-				9F0BBD68185D345C0007D318 /* matrix.h */,
-				9F0BBD67185D345C0007D318 /* matrix.mm */,
+				3D86F8DB2B7C558400A624E2 /* graphics */,
 				9F0BBD6D185D34680007D318 /* main.mm */,
-				9F0BBD62185D345C0007D318 /* Game.h */,
-				9F0BBD61185D345C0007D318 /* Game.mm */,
+				9F0BBD62185D345C0007D318 /* GameAppDelegate.h */,
+				9F0BBD61185D345C0007D318 /* GameAppDelegate.mm */,
+				9F0BBD64185D345C0007D318 /* ES2RendererView.h */,
+				9F0BBD63185D345C0007D318 /* ES2RendererView.mm */,
 				9F0BBD44185D33C90007D318 /* Images.xcassets */,
 			);
 			path = iOSGameNoNIB;
@@ -186,9 +194,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F0BBD6B185D345C0007D318 /* Shaders.mm in Sources */,
-				9F0BBD69185D345C0007D318 /* Game.mm in Sources */,
+				9F0BBD69185D345C0007D318 /* GameAppDelegate.mm in Sources */,
 				9F0BBD6C185D345C0007D318 /* matrix.mm in Sources */,
-				9F0BBD6A185D345C0007D318 /* ES2Renderer.mm in Sources */,
+				9F0BBD6A185D345C0007D318 /* ES2RendererView.mm in Sources */,
 				9F0BBD6E185D34680007D318 /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
